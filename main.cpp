@@ -35,6 +35,7 @@ bool turno= true;
 int n=0+rand() % (10),m=1+rand() % (10),min=1;
 
 
+// relleno_de_la_matriz dibuja la impresion por pantalla
 void relleno_de_la_matriz(char matriz[10][10]){
 	int man=0;
 	std::cout << "============" << std::endl;
@@ -68,7 +69,7 @@ void relleno_de_la_matriz(char matriz[10][10]){
 	std::cout << "============" << std::endl;
 }
 
-
+// la funcion mover recive teclas por el usuario y las reserva la variable ni que sera usada mas adelante
 void mover(){
 	if (kbhit()){
 		char teclas=getch();
@@ -90,6 +91,8 @@ void mover(){
 }
 
 
+// formas de perder ejecuta el poder traspasar paredes y retrocede una posicion cuando
+// choca con su cuerpo y se detiende.
 void formas_de_perder(){
 	if (cuerpo[ncuerpo-1][0]>=10){
 		cuerpo[ncuerpo-1][0]=0;
@@ -117,6 +120,7 @@ void formas_de_perder(){
 }
 
 
+// La siguiente funcion hace posible el avance
 void movimiento_gusano(int direccion){
 	mover();
 	int a[2],b[2];
@@ -154,6 +158,7 @@ void movimiento_gusano(int direccion){
 }
 
 
+// si la posicion de la cabeza es igual ala pos de la comina la variable ncuerpo aumenta y puntacion tambien
 void comer(){
 	if (cuerpo[ncuerpo-1][0]==n && cuerpo[ncuerpo-1][1]==m){
 		mover();
@@ -185,9 +190,11 @@ void comer(){
 
 int main(){
 	char plano[10][10];
+	// donde inicia
 	cuerpo[0][0]=5,cuerpo[0][1]=5;
 
 
+	// deseno menu inicio
 	std::cout << "\n\n************************************************\n*********************SNAKE**********************\n************************************************\n" << std::endl;
 	std::cout << "intrucciones: " << std::endl;
 	std::cout << "\t+\tPodras traspasar paredes pero\n\t\tse te aumentara la velocidad\n\t\teste efecto podra revertirse\n\t\tcomiento un vonus que aparacera\n\t\tcada cierto tiempo." << std::endl;
@@ -196,6 +203,7 @@ int main(){
 	std::cout << "Quieres empezar (S/N): ";
 	std::cin >> quieres_jugar ;
 
+	// bucle  de condicion
 	while (true)
 	{
 		if (quieres_jugar == "S"){
@@ -212,7 +220,8 @@ int main(){
 			turno= true;
 
 			n=0+rand() % (10),m=1+rand() % (10),min=1;
-
+			
+			// bucle del juego principal
 			while(turno){
 				for (int w=0;w<veloci;++w){}	
 				mover();
@@ -247,9 +256,10 @@ int main(){
 				//printf("\033[H\033[J");
 				//system("cls");
 			}
+			// deseno parte final
 			std::cout << "\n****************************************\n***************GAME OVER****************\n****************************************" << std::endl;
 			std::cout << "PUNTUACION: " << puntuacion << std::endl<< std::endl<< std::endl;
-			
+			// pregunta si el usuario quiere segir jungando o rendirse
 			std::cout << "Quieres volver a intentar(S/N): ";
 			std::cin >> quieres_jugar;
 		} else {
